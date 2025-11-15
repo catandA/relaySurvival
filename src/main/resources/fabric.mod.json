@@ -3,13 +3,13 @@
 	"id": "relaysurvival",
 	"version": "${version}",
 	"name": "RelaySurvival",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "接力生存",
 	"authors": [
-		"Me!"
+		"catand"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/catandA"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/relaysurvival/icon.png",
@@ -20,7 +20,10 @@
 		],
 		"fabric-datagen": [
 			"com.catandrelaysurvival.RelaySurvivalDataGenerator"
-		]
+		],
+       "modmenu": [
+         "com.catandrelaysurvival.ModMenuApiImpl"
+        ]
 	},
 	"mixins": [
 		"relaysurvival.mixins.json"
