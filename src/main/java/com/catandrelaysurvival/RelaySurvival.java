@@ -1,5 +1,7 @@
 package com.catandrelaysurvival;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -18,7 +20,7 @@ public class RelaySurvival implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
+		AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
 		LOGGER.info("Hello Fabric world!");
 	}
 }

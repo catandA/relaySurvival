@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "relaysurvival",
 	"version": "${version}",
-	"name": "RelaySurvival",
-	"description": "接力生存",
+	"name": "接力生存",
+	"description": "用来接力生存的mod",
 	"authors": [
 		"catand"
 	],
