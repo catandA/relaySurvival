@@ -3,7 +3,6 @@
   "package": "com.catandrelaysurvival.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DeathScreenMixin",
     "LevelInfoMixin"
   ],
   "injectors": {

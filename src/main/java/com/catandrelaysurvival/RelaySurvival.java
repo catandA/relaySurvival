@@ -1,11 +1,14 @@
 package com.catandrelaysurvival;
 
+import com.catandrelaysurvival.screen.CustomDeathScreen;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -34,6 +37,13 @@ public class RelaySurvival implements ModInitializer {
 		ServerTickEvents.END_SERVER_TICK.register(this::checkNewDay);
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			BackupCommand.register(dispatcher);
+		});
+
+		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+			if (screen instanceof DeathScreen) {
+				// 取消原版死亡屏幕，替换为自定义屏幕
+				client.setScreen(new CustomDeathScreen(Text.translatable("deathScreen.title.hardcore"), true));
+			}
 		});
 	}
 
