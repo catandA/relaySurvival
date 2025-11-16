@@ -1,25 +1,28 @@
 package com.catandrelaysurvival;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.text.Text;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.util.path.SymlinkValidationException;
-import net.minecraft.world.level.storage.LevelStorage;
+import net.minecraft.world.level.storage.LevelResource;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class WorldBackupUtil {
 	public static void onNewDay(MinecraftServer server, long currentDay) {
 		// 聊天发送消息
-		server.getPlayerManager().broadcast(Text.literal("存档在你手里又活过了新的一天！现在的总天数: " + currentDay), false);
+		server.getPlayerList().broadcastSystemMessage(Component.literal("存档在你手里又活过了新的一天！现在的总天数: " + currentDay), false);
 
 		// 创建备份文件夹
-		File backupsDir = new File(server.getSavePath(WorldSavePath.ROOT).toFile().getParent(), "backups");
+		File backupsDir = new File(server.getWorldPath(LevelResource.ROOT).toFile().getParent(), "backups");
 		if (!backupsDir.exists()) {
 			backupsDir.mkdirs();
 		}
@@ -36,7 +39,7 @@ public class WorldBackupUtil {
 
 	public static boolean backupWorld(MinecraftServer server, String backupName) {
 		try {
-			File worldDir = server.getSavePath(WorldSavePath.ROOT).toFile();
+			File worldDir = server.getWorldPath(LevelResource.ROOT).toFile();
 			File backupsDir = new File(worldDir, "backups");
 
 			if (!backupsDir.exists()) {

@@ -4,14 +4,13 @@ import com.catandrelaysurvival.screen.CustomDeathScreen;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.client.gui.screen.DeathScreen;
+import net.minecraft.client.gui.screens.DeathScreen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
+import net.minecraft.server.level.ServerLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,14 +41,14 @@ public class RelaySurvival implements ModInitializer {
 		ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
 			if (screen instanceof DeathScreen) {
 				// 取消原版死亡屏幕，替换为自定义屏幕
-				client.setScreen(new CustomDeathScreen(Text.translatable("deathScreen.title.hardcore"), true));
+				client.setScreen(new CustomDeathScreen(Component.translatable("deathScreen.title.hardcore"), true));
 			}
 		});
 	}
 
 	private void checkNewDay(MinecraftServer server) {
-		ServerWorld world = server.getOverworld();
-		long currentTime = world.getTime();
+		ServerLevel world = server.overworld();
+		long currentTime = world.getGameTime();
 
 		if (lastTickTime == -1) {
 			lastTickTime = currentTime;

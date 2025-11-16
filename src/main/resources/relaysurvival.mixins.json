@@ -3,7 +3,7 @@
   "package": "com.catandrelaysurvival.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LevelInfoMixin"
+    "LevelSettingsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -13,6 +13,6 @@
   },
   "client": [
     "CreateWorldScreenMoreTabMixin",
-    "WorldCreatorMixin"
+    "WorldCreationUiStateMixin"
   ]
 }
