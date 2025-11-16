@@ -1,5 +1,6 @@
 package com.catandrelaysurvival;
 
+import net.minecraft.client.gui.screens.worldselection.WorldCreationUiState;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.storage.LevelResource;
@@ -17,6 +18,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class WorldBackupUtil {
+	public static WorldCreationUiState.WorldTypeEntry defaultWorldType;
 	public static void onNewDay(MinecraftServer server, long currentDay) {
 		// 聊天发送消息
 		server.getPlayerList().broadcastSystemMessage(Component.literal("存档在你手里又活过了新的一天！现在的总天数: " + currentDay), false);
